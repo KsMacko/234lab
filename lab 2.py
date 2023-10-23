@@ -29,11 +29,11 @@ def task2(smth):
         for el in smth:
             if isinstance(el, int):
                 numbers = True
-                if el % 2 == 0:
+                if el % 2 == 0 and el != 0:
                     count += 1
                 if el > max_int:
                     max_int = el
-                if el > 0:
+                if el >= 0:
                     new_list.append(el)
         if numbers:
             print(f"Максимальное число - {max_int}")
@@ -43,7 +43,7 @@ def task2(smth):
                 print(f"Количество четных чисел - {count}")
             print(f"Новый список: {new_list}")
         else:
-            print("Список не содержит чисел!")
+            print("Список не содержит чисел!\n")
     elif isinstance(smth, dict):
         sorted_dict = sorted(smth.items(), key=lambda v: v[1], reverse=True)
         print(f"Отсортированный в обратном порядке по значениям словарь: {sorted_dict}\n")
@@ -66,21 +66,22 @@ def task3(m):
             print(f"{i}\n")
         rows = len(m)
         colums = len(m[0])
-        true_col = 0
+        true_col = -1
         summ = 0
-
+        neg_num_in_col = 0
         for j in range(colums):
-            negative = True
             for i in range(rows):
-                if m[i][j] >= 0:
-                    negative = False
-                    break
-            if negative:
+                if m[i][j] < 0:
+                    neg_num_in_col += 1
+            if neg_num_in_col == colums:
                 true_col = j
+                print(f"Подход. столбец - {true_col}")
+                break
+            else:
+                neg_num_in_col = 0
         if true_col >= 0:
-            for j in range(colums):
-                for i in range(rows):
-                    summ += m[i][j]
+            for i in range(rows):
+                summ += m[i][true_col]
             return summ / rows
         else:
             print("Нет подхощях столбцов!")
