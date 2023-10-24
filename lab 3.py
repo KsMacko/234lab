@@ -61,14 +61,24 @@ def task2():
 def task3():
     with open("предметы.txt", "r", encoding='utf-8') as subjects:
         amount_of_hours = {}
+        summ = 0
         while True:
             line = subjects.readline()
             if not line:
                 break
             print(line)
-            index_for_subj = line.find(":")
-            subject = line[0:index_for_subj]
-            amount_of_hours[line[0:line.find(":")]] = int(line[(line.find(":") + 2):line.find('(')])
+            index_for_start = line.find(":") + 2
+            subject = line[0:index_for_start + 2]
+            while index_for_start < len(line):
+                summ += int(line[index_for_start:(line.find('('))])
+                index_for_start = line.find("(") + 4
+                if index_for_start > len(line):
+                    break
+                else:
+                    line = line[index_for_start:len(line)]
+                    index_for_start = 0
+            amount_of_hours[subject] = summ
+            summ = 0
     print(amount_of_hours)
 
 
