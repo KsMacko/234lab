@@ -53,8 +53,23 @@ def task2():
                 elements[0] = "Четыре"
                 count += 1
             line = ' '.join(elements)
+            print(line)
             with open("new_file.txt", "a") as new_file:
                 new_file.write(line)
+
+
+def task3():
+    with open("предметы.txt", "r", encoding='utf-8') as subjects:
+        amount_of_hours = {}
+        while True:
+            line = subjects.readline()
+            if not line:
+                break
+            print(line)
+            index_for_subj = line.find(":")
+            subject = line[0:index_for_subj]
+            amount_of_hours[line[0:line.find(":")]] = int(line[(line.find(":") + 2):line.find('(')])
+    print(amount_of_hours)
 
 
 def menu():
@@ -70,7 +85,7 @@ def menu():
             task2()
             choice = -1
         elif choice == 3:
-
+            task3()
             choice = -1
 
 

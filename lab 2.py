@@ -4,8 +4,6 @@ def check_input(message):
         inp = int(input(message))
     except ValueError:
         print("Ошибка ввода! Пожалуйста, повторите!")
-    finally:
-        print("Без пнятия написать, но этот блок выполнится в любом случае\n")
     return inp
 
 
