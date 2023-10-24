@@ -86,7 +86,7 @@ def menu():
     choice = -1
     while choice != 0:
         print("\nВыберите:\n1.Task 1\n2.Task 2\n3.Task3")
-        while choice < 0 or choice > 4:
+        while choice < 0 or choice > 3:
             choice = check_input("\nВаш выбор - ")
         if choice == 1:
             task1()
