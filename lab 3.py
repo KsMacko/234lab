@@ -27,9 +27,34 @@ def task1():
                     d[word] = words.count(word)
             for k, v in d.items():
                 if int(v) > 1:
-                    wf.write(line + "\n")
+                    wf.write(line)
     with open("F2.txt", 'r') as f:
         print(*f)
+
+
+def task2():
+    with open("число - число.txt", "r") as num_num:
+        count = 1
+        while True:
+            line = num_num.readline()
+            if not line:
+                break
+            elements = line.split(" ")
+            if count == 1:
+                elements[0] = "Один"
+                count += 1
+            elif count == 2:
+                elements[0] = "Два"
+                count += 1
+            elif count == 3:
+                elements[0] = "Три"
+                count += 1
+            elif count == 4:
+                elements[0] = "Четыре"
+                count += 1
+            line = ' '.join(elements)
+            with open("new_file.txt", "a") as new_file:
+                new_file.write(line)
 
 
 def menu():
@@ -42,7 +67,7 @@ def menu():
             task1()
             choice = -1
         elif choice == 2:
-
+            task2()
             choice = -1
         elif choice == 3:
 
