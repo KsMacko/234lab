@@ -1,4 +1,3 @@
-import math
 class List:
     def __init__(self):
         self.data = []
@@ -58,6 +57,41 @@ class Auto(Transport):
         print("перевозка на автомобиле")
 
 
+class Room:
+    height1 = 0
+    length1 = 0
+    height2 = 0
+    length2 = 0
+
+    @staticmethod
+    def wallpaper(height1, length1, length2, square):
+        return 2 * height1 * length1 + 2 * height1 * length2 - square
+
+
+class Fruit:
+    color = ""
+    shape = ""
+    taste = ""
+    amount = 0
+
+    def __init__(self, color, shape, taste):
+        self.color = color
+        self.shape = shape
+        self.taste = taste
+        Fruit.amount = Fruit.amount + 1
+
+    def __del__(self):
+        print("Объект удален")
+
+    @staticmethod
+    def opinion():
+        print("Я думаю, фрукты очень вкусные")
+
+    @classmethod
+    def amount_of_fruits(cls):
+        print("Всего фруктов: ", cls.amount)
+
+
 def check_input(message):
     inp = -1
     try:
@@ -71,8 +105,8 @@ def menu():
     ll = List()
     choice1 = -1
     while choice1 != 0:
-        print("\nВыберите:\n1.Task 1\n2.Task 2\n3.Task3")
-        while choice1 < 0 or choice1 > 3:
+        print("\nВыберите:\n1.Task 1\n2.Task 2\n3.Task3\n4.Task4")
+        while choice1 < 0 or choice1 > 4:
             choice1 = check_input("\nВаш выбор - ")
         if choice1 == 1:
             choice = -1
@@ -109,7 +143,6 @@ def menu():
                     choice = -1
             choice1 = -1
         elif choice1 == 2:
-            distance = 0
             plane = Plane(0.13, 340)
             train = Train(0.12, 160)
             auto = Auto(2.3, 120)
@@ -130,24 +163,57 @@ def menu():
                 else:
                     distance = 2242
                 if choice_route != 0:
-                    time = [plane.price_per_km/plane.speed, train.price_per_km/train.speed, auto.price_per_km/auto.speed]
+                    time = [plane.price_per_km / plane.speed, train.price_per_km / train.speed,
+                            auto.price_per_km / auto.speed]
                     index_benefit = time.index(min(time))
                     if index_benefit == 0:
                         print(f"Самый выгодный вариант -")
                         plane.method_of_transport()
-                        print(f"время {round(distance/plane.speed,2)} часа| стоимость {round(distance*plane.price_per_km, 2)} BYN")
+                        print(
+                            f"время {round(distance / plane.speed, 2)} часа| стоимость {round(distance * plane.price_per_km, 2)} BYN")
                     elif index_benefit == 1:
                         print(f"Самый выгодный вариант -")
                         train.method_of_transport()
-                        print(f"время {round(distance/train.speed, 2)} часа| стоимость {round(distance*train.price_per_km, 2)} BYN")
+                        print(
+                            f"время {round(distance / train.speed, 2)} часа| стоимость {round(distance * train.price_per_km, 2)} BYN")
                     elif index_benefit == 2:
                         print(f"Самый выгодный вариант -")
                         auto.method_of_transport()
-                        print(f"время {round(distance / auto.speed, 2)} часа| стоимость {round(distance * auto.price_per_km, 2)}BYN")
+                        print(
+                            f"время {round(distance / auto.speed, 2)} часа| стоимость {round(distance * auto.price_per_km, 2)}BYN")
                     choice_route = 0
             choice1 = -1
         elif choice1 == 3:
-
+            print("Пожалуйста, введите размер первой стены:")
+            h1 = check_input("Высота - ")
+            l1 = check_input("Длина - ")
+            print("Пожалуйста, введите длину второй стены:")
+            l2 = check_input("Длина - ")
+            room = Room()
+            door_h = check_input("Введите высоту дверного проема - ")
+            door_l = check_input("Введите длину дверного проема - ")
+            wind_ch = check_input("В комнате есть окна?(Да - 1)")
+            square = door_l * door_h
+            if wind_ch == 1:
+                amount_wind = check_input("Введите количество: ")
+                for i in range(amount_wind):
+                    w_h = check_input("Введите высоту окна - ")
+                    w_l = check_input("Введите длину окна - ")
+                    square += w_h * w_l
+                print(f"Площадь - {room.wallpaper(h1, l1, l2, square)}")
+            else:
+                print(f"Площадь - {room.wallpaper(h1, l1, l2, square)}")
+            choice1 = -1
+        elif choice1 == 4:
+            apple = Fruit("red", "round", "sweet")
+            orange = Fruit("orange", "round", "sweet")
+            lemon = Fruit("yellow", "ellipse", "sour")
+            print(f"Фрукт - Яблоко Цвет - {apple.color} Форма - {apple.shape} Вкус - {apple.taste}")
+            print(f"Фрукт - Апельсин Цвет - {orange.color} Форма - {orange.shape} Вкус - {orange.taste}")
+            print(f"Фрукт - Лимон Цвет - {lemon.color} Форма - {lemon.shape} Вкус - {lemon.taste}")
+            Fruit.opinion()
+            Fruit.amount_of_fruits()
+            del apple
             choice1 = -1
 
 
