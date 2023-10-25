@@ -113,6 +113,10 @@ def menu():
             plane = Plane(0.13, 340)
             train = Train(0.12, 160)
             auto = Auto(2.3, 120)
+            with open("Transport.txt", "w") as transport:
+                transport.write("Самолет" + str(plane.price_per_km) + str(plane.speed))
+                transport.write("Поезд" + str(train.price_per_km) + str(train.speed))
+                transport.write("Автомобиль" + str(auto.price_per_km) + str(auto.speed))
             choice_route = -1
             while choice_route != 0:
                 print("Пожалуйста, выберите маршрут: \n1.Минск - Москва (675 км),\n2.Минск - Санкт-Петербург (692 "
@@ -140,6 +144,7 @@ def menu():
                         print(f"Самый выгодный вариант -")
                         auto.method_of_transport()
                         print(f"время {round(distance / auto.speed, 2)} часа| стоимость {round(distance * auto.price_per_km, 2)}BYN")
+                    choice_route = 0
             choice1 = -1
         elif choice1 == 3:
 
